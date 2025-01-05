@@ -1,10 +1,10 @@
-import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pageobjects.LoginPage;
 
 public class SampleTest {
     private WebDriver driver;
@@ -16,12 +16,13 @@ public class SampleTest {
 
     @Test
     public void loadGoogle() {
-        driver.get("https://www.google.com");
-        assertEquals("Google", driver.getTitle());
+        LoginPage login = new LoginPage(driver);
+        login.goTo();
+        login.validLogin("descript.linking@gmail.com", "Lindy123$");
     }
 
     @After
     public void cleanUp() {
-        driver.quit();
+        // driver.quit();
     }
 }
