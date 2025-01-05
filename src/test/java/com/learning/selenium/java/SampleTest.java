@@ -24,6 +24,7 @@ public class SampleTest {
         login.validLogin("descript.linking@gmail.com", "Lindy123$");
 
         DashboardPage dashboard = new DashboardPage(driver);
+        dashboard.addToCart("IPHONE 13 PRO");
     }
 
     @After
