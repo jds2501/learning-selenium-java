@@ -1,4 +1,4 @@
-package pageobjects;
+package com.learning.selenium.java.pageobjects;
 
 import java.time.Duration;
 
