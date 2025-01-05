@@ -15,7 +15,7 @@ public class SampleTest {
     }
 
     @Test
-    public void loadGoogle() {
+    public void loginTest() {
         LoginPage login = new LoginPage(driver);
         login.goTo();
         login.validLogin("descript.linking@gmail.com", "Lindy123$");
@@ -23,6 +23,6 @@ public class SampleTest {
 
     @After
     public void cleanUp() {
-        // driver.quit();
+        driver.quit();
     }
 }
