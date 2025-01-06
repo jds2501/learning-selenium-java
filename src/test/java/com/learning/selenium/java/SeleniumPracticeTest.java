@@ -9,12 +9,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import com.learning.selenium.java.pageobjects.CartPage;
+import com.learning.selenium.java.pageobjects.CheckoutPage;
 import com.learning.selenium.java.pageobjects.DashboardPage;
 import com.learning.selenium.java.pageobjects.LoginPage;
 
 public class SeleniumPracticeTest {
     private WebDriver driver;
     private final String productName = "IPHONE 13 PRO";
+    private final String username = "descript.linking@gmail.com";
+    private final String password = "Lindy123$";
 
     @Before
     public void initializeSelenium() {
@@ -25,7 +28,7 @@ public class SeleniumPracticeTest {
     public void seleniumPracticeTest() {
         LoginPage login = new LoginPage(driver);
         login.goTo();
-        login.validLogin("descript.linking@gmail.com", "Lindy123$");
+        login.validLogin(this.username, this.password);
 
         DashboardPage dashboard = new DashboardPage(driver);
         assertTrue(dashboard.addToCart(this.productName));
@@ -34,10 +37,15 @@ public class SeleniumPracticeTest {
         CartPage cartPage = new CartPage(driver);
         assertTrue(cartPage.getProductName().equals(this.productName));
         cartPage.checkout();
+
+        CheckoutPage checkoutPage = new CheckoutPage(driver);
+        assertTrue(checkoutPage.getShippingEmail().equals(this.username));
+        assertTrue(checkoutPage.getProductName().equals(this.productName));
+        assertTrue(checkoutPage.getQuantity().contains("1"));
     }
 
     @After
     public void cleanUp() {
-        // driver.quit();
+        driver.quit();
     }
 }
