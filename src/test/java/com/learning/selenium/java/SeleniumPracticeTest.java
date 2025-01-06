@@ -19,6 +19,7 @@ public class SeleniumPracticeTest {
     private final String username = "descript.linking@gmail.com";
     private final String password = "Lindy123$";
     private final String country = "United States";
+    private final String coupon = "rahulshettyacademy";
 
     @Before
     public void initializeSelenium() {
@@ -44,7 +45,12 @@ public class SeleniumPracticeTest {
         assertTrue(checkoutPage.getProductName().equals(this.productName));
         assertTrue(checkoutPage.getQuantity().contains("1"));
 
-        checkoutPage.selectShippingCountry(this.country);
+        assertTrue(checkoutPage.selectShippingCountry(this.country));
+
+        checkoutPage.applyCoupon(this.coupon);
+        assertTrue(checkoutPage.getCouponAppliedText().contains("Coupon Applied"));
+
+        checkoutPage.placeOrder();
     }
 
     @After

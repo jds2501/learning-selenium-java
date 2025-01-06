@@ -43,7 +43,7 @@ public class CheckoutPage {
         return productQuantityField.getText();
     }
 
-    public void selectShippingCountry(String country) {
+    public boolean selectShippingCountry(String country) {
         this.driver.findElement(this.shippingCountry).sendKeys(country);
         List<WebElement> selectableCountries = (new WebDriverWait(this.driver, Duration.ofSeconds(10))).until(
                 ExpectedConditions.visibilityOfAllElementsLocatedBy(this.countryList));
@@ -58,5 +58,22 @@ public class CheckoutPage {
         if (selectableCountry != null) {
             selectableCountry.click();
         }
+
+        return selectableCountry != null;
+    }
+
+    public void applyCoupon(String coupon) {
+        this.driver.findElement(this.couponText).sendKeys(coupon);
+        this.driver.findElement(this.submitCoupon).click();
+    }
+
+    public String getCouponAppliedText() {
+        WebElement couponAppliedText = (new WebDriverWait(this.driver, Duration.ofSeconds(10))).until(
+                ExpectedConditions.visibilityOfElementLocated(this.couponApplied));
+        return couponAppliedText.getText();
+    }
+
+    public void placeOrder() {
+        this.driver.findElement(this.placeOrderButton).click();
     }
 }
