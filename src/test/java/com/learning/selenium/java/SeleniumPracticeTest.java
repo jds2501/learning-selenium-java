@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 
 import com.learning.selenium.java.pageobjects.CartPage;
 import com.learning.selenium.java.pageobjects.CheckoutPage;
@@ -23,7 +24,9 @@ public class SeleniumPracticeTest {
 
     @Before
     public void initializeSelenium() {
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless", "--no-sandbox", "--window-size=1920,1080");
+        driver = new ChromeDriver(options);
     }
 
     @Test
