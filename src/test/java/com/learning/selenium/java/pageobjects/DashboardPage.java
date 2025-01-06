@@ -13,8 +13,9 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class DashboardPage {
     private final By productsBody = By.className("card-body");
     private final By productsBodyText = By.cssSelector(".card-body b");
-    private final By cardLink = By.cssSelector("[routerlink='/dashboard/cart']");
+    private final By cart = By.cssSelector("[routerlink='/dashboard/cart']");
     private final By buyProduct = By.cssSelector("[style='float: right;']");
+    private final By buySpinner = By.className("ngx-spinner-overlay");
     private WebDriver driver;
 
     public DashboardPage(WebDriver driver) {
@@ -38,8 +39,16 @@ public class DashboardPage {
 
         if (targetProductIndex != -1) {
             productBodies.get(targetProductIndex).findElement(this.buyProduct).click();
+            (new WebDriverWait(this.driver, Duration.ofSeconds(10))).until(
+                    ExpectedConditions.visibilityOfElementLocated(this.buySpinner));
+            (new WebDriverWait(this.driver, Duration.ofSeconds(10))).until(
+                    ExpectedConditions.invisibilityOfElementLocated(this.buySpinner));
         }
 
         return targetProductIndex != -1;
+    }
+
+    public void navigateToCart() {
+        this.driver.findElement(this.cart).click();
     }
 }
