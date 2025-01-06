@@ -2,7 +2,6 @@ package com.learning.selenium.java.pageobjects;
 
 import java.time.Duration;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
