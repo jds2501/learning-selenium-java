@@ -18,6 +18,7 @@ public class SeleniumPracticeTest {
     private final String productName = "IPHONE 13 PRO";
     private final String username = "descript.linking@gmail.com";
     private final String password = "Lindy123$";
+    private final String country = "United States";
 
     @Before
     public void initializeSelenium() {
@@ -42,6 +43,8 @@ public class SeleniumPracticeTest {
         assertTrue(checkoutPage.getShippingEmail().equals(this.username));
         assertTrue(checkoutPage.getProductName().equals(this.productName));
         assertTrue(checkoutPage.getQuantity().contains("1"));
+
+        checkoutPage.selectShippingCountry(this.country);
     }
 
     @After

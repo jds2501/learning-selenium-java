@@ -1,6 +1,7 @@
 package com.learning.selenium.java.pageobjects;
 
 import java.time.Duration;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,6 +14,7 @@ public class CheckoutPage {
     private final By productName = By.cssSelector(".item__title");
     private final By productQuantity = By.cssSelector(".item__quantity");
     private final By shippingCountry = By.cssSelector("[placeholder='Select Country']");
+    private final By countryList = By.cssSelector(".ta-item");
     private final By couponText = By.cssSelector("[name='coupon']");
     private final By submitCoupon = By.cssSelector("button[type='submit']");
     private final By couponApplied = By.cssSelector(".mt-1.ng-star-inserted");
@@ -39,5 +41,22 @@ public class CheckoutPage {
         WebElement productQuantityField = (new WebDriverWait(this.driver, Duration.ofSeconds(10))).until(
                 ExpectedConditions.visibilityOfElementLocated(this.productQuantity));
         return productQuantityField.getText();
+    }
+
+    public void selectShippingCountry(String country) {
+        this.driver.findElement(this.shippingCountry).sendKeys(country);
+        List<WebElement> selectableCountries = (new WebDriverWait(this.driver, Duration.ofSeconds(10))).until(
+                ExpectedConditions.visibilityOfAllElementsLocatedBy(this.countryList));
+
+        WebElement selectableCountry = null;
+        for (int i = 0; i < selectableCountries.size() && selectableCountry == null; i++) {
+            if (selectableCountries.get(i).getText().equals(country)) {
+                selectableCountry = selectableCountries.get(i);
+            }
+        }
+
+        if (selectableCountry != null) {
+            selectableCountry.click();
+        }
     }
 }
