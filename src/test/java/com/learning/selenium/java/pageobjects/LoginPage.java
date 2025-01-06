@@ -9,6 +9,7 @@ public class LoginPage {
     private final By signInButton = By.id("login");
     private final By userEmailTextField = By.id("userEmail");
     private final By passwordTextField = By.id("userPassword");
+    private final By startRegister = By.className("btn1");
     private WebDriver driver;
 
     public LoginPage(WebDriver driver) {
@@ -17,6 +18,10 @@ public class LoginPage {
 
     public void goTo() {
         this.driver.get(this.url);
+    }
+
+    public void startRegistration() {
+        this.driver.findElement(this.startRegister).click();
     }
 
     public void validLogin(String username, String password) {

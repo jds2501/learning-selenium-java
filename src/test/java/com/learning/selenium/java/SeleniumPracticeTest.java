@@ -27,7 +27,14 @@ public class SeleniumPracticeTest {
     }
 
     @Test
-    public void seleniumPracticeTest() {
+    public void registerAccountTest() {
+        LoginPage login = new LoginPage(driver);
+        login.goTo();
+        login.startRegistration();
+    }
+
+    @Test
+    public void buyAndCheckoutTest() {
         LoginPage login = new LoginPage(driver);
         login.goTo();
         login.validLogin(this.username, this.password);
