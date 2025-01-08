@@ -15,7 +15,7 @@ public class HomeTest {
     public void initialize() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--no-sandbox", "--window-size=1920,1080");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
     }
 
     @Test
