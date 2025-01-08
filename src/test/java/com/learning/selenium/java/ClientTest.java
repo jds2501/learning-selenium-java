@@ -14,7 +14,7 @@ import com.learning.selenium.java.pageobjects.CheckoutPage;
 import com.learning.selenium.java.pageobjects.DashboardPage;
 import com.learning.selenium.java.pageobjects.LoginPage;
 
-public class SeleniumPracticeTest {
+public class ClientTest {
     private WebDriver driver;
     private final String productName = "IPHONE 13 PRO";
     private final String username = "descript.linking@gmail.com";
