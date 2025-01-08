@@ -2,9 +2,15 @@ package com.learning.selenium.java;
 
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -16,7 +22,6 @@ import com.learning.selenium.java.pageobjects.LoginPage;
 
 public class ClientTest {
     private WebDriver driver;
-    private final String productName = "IPHONE 13 PRO";
     private final String username = "descript.linking@gmail.com";
     private final String password = System.getenv("RAHUL_PASSWORD");
     private final String country = "United States";
@@ -38,21 +43,35 @@ public class ClientTest {
 
     @Test
     public void buyAndCheckoutTest() {
+        ClassLoader classLoader = ClientTest.class.getClassLoader();
+        File config = new File(classLoader.getResource("config.json").getFile());
+        String productName = null;
+
+        try {
+            FileInputStream fis = new FileInputStream(config);
+            JSONTokener tokener = new JSONTokener(fis);
+            JSONObject jsonObject = new JSONObject(tokener);
+            productName = jsonObject.getString("productName");
+        } catch (FileNotFoundException err) {
+            System.err.println("Failed to load config.json");
+            System.exit(1);
+        }
+
         LoginPage login = new LoginPage(driver);
         login.goTo();
         login.validLogin(this.username, this.password);
 
         DashboardPage dashboard = new DashboardPage(driver);
-        assertTrue(dashboard.addToCart(this.productName));
+        assertTrue(dashboard.addToCart(productName));
         dashboard.navigateToCart();
 
         CartPage cartPage = new CartPage(driver);
-        assertTrue(cartPage.getProductName().equals(this.productName));
+        assertTrue(cartPage.getProductName().equals(productName));
         cartPage.checkout();
 
         CheckoutPage checkoutPage = new CheckoutPage(driver);
         assertTrue(checkoutPage.getShippingEmail().equals(this.username));
-        assertTrue(checkoutPage.getProductName().equals(this.productName));
+        assertTrue(checkoutPage.getProductName().equals(productName));
         assertTrue(checkoutPage.getQuantity().contains("1"));
 
         assertTrue(checkoutPage.selectShippingCountry(this.country));
