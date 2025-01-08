@@ -18,7 +18,7 @@ public class ClientTest {
     private WebDriver driver;
     private final String productName = "IPHONE 13 PRO";
     private final String username = "descript.linking@gmail.com";
-    private final String password = "Lindy123$";
+    private final String password = System.getenv("RAHUL_PASSWORD");
     private final String country = "United States";
     private final String coupon = "rahulshettyacademy";
 

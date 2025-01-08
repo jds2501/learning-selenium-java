@@ -28,5 +28,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
+      env:
+        RAHUL_PASSWORD: ${{ secrets.RAHUL-PASSWORD }}
       run: mvn -B package --file pom.xml
   
