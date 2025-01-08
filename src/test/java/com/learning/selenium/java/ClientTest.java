@@ -26,7 +26,6 @@ public class ClientTest {
     public void initializeSelenium() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--no-sandbox", "--window-size=1920,1080");
-        System.out.println("STARTING.... " + password);
         driver = new ChromeDriver(options);
     }
 
