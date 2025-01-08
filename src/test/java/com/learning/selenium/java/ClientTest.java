@@ -1,24 +1,24 @@
 package com.learning.selenium.java;
 
-import static org.junit.Assert.assertTrue;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import com.learning.selenium.java.pageobjects.CartPage;
 import com.learning.selenium.java.pageobjects.CheckoutPage;
 import com.learning.selenium.java.pageobjects.DashboardPage;
 import com.learning.selenium.java.pageobjects.LoginPage;
+
+import static org.testng.Assert.assertTrue;
 
 public class ClientTest {
     private WebDriver driver;
@@ -27,7 +27,7 @@ public class ClientTest {
     private final String country = "United States";
     private final String coupon = "rahulshettyacademy";
 
-    @Before
+    @BeforeMethod
     public void initializeSelenium() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless", "--no-sandbox", "--window-size=1920,1080");
@@ -82,7 +82,7 @@ public class ClientTest {
         checkoutPage.placeOrder();
     }
 
-    @After
+    @AfterMethod
     public void cleanUp() {
         driver.quit();
     }
